@@ -32,7 +32,7 @@ SKILLS_MAP = {
     "Backend Intern": ["Python", "SQL", "Docker"],
     "Frontend Intern": ["JavaScript", "React", "Git"],
     "Full Stack Intern": ["JavaScript", "React", "SQL"],
-    "Data Engineering Intern": ["Python", "SQL", "PySpark", "AWS"],
+    "Data Engineering Intern": ["Python", "SQL", "PySpark", "AWS", "Airflow"],
     "Data Analyst Intern": ["Python", "SQL", "Excel"],
     "ML Intern": ["Python", "ML", "SQL"],
     "AI Intern": ["Python", "LLM", "SQL"],
