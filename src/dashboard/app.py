@@ -68,23 +68,47 @@ SELECT
 FROM job_snapshots;
 """
 
+quality_metrics = {
+    "Missing Locations": """
+        SELECT COUNT(*) AS count
+        FROM job_snapshots
+        WHERE location IS NULL;
+    """,
+    "Missing Stipends": """
+        SELECT COUNT(*) AS count
+        FROM job_snapshots
+        WHERE stipend IS NULL;
+    """,
+    "Orphan Skills": """
+        SELECT COUNT(*) AS count
+        FROM skills s
+        LEFT JOIN job_skills js ON s.skill_id = js.skill_id
+        WHERE js.skill_id IS NULL;
+    """
+}
+
 skill_df = pd.read_sql(skill_query, engine)
 role_df = pd.read_sql(role_query, engine)
 company_df = pd.read_sql(company_query, engine)
 location_df = pd.read_sql(location_query, engine)
 summary_df = pd.read_sql(summary_query, engine)
 
+missing_loc_df = pd.read_sql(quality_metrics["Missing Locations"], engine)
+missing_stipend_df = pd.read_sql(quality_metrics["Missing Stipends"], engine)
+orphan_skills_df = pd.read_sql(quality_metrics["Orphan Skills"], engine)
+
 col1, col2, col3 = st.columns(3)
 col1.metric("Snapshots", int(summary_df["total_snapshots"][0]))
 col2.metric("Jobs", int(summary_df["unique_jobs"][0]))
 col3.metric("Active Days", int(summary_df["active_days"][0]))
 
-tab1, tab2, tab3, tab4 = st.tabs(
+tab1, tab2, tab3, tab4, tab5 = st.tabs(
     [
         "Market Overview",
         "Skills",
         "Companies",
-        "Locations"
+        "Locations",
+        "Data Quality"
     ]
 )
 
@@ -162,4 +186,21 @@ with tab4:
     st.plotly_chart(
         location_fig,
         use_container_width=True
+    )
+
+with tab5:
+    st.subheader("Data Quality Pipeline Audits")
+    q_col1, q_col2, q_col3 = st.columns(3)
+    
+    q_col1.metric(
+        label="Missing Locations",
+        value=int(missing_loc_df["count"].iloc[0])
+    )
+    q_col2.metric(
+        label="Missing Stipends",
+        value=int(missing_stipend_df["count"].iloc[0])
+    )
+    q_col3.metric(
+        label="Orphan Skills",
+        value=int(orphan_skills_df["count"].iloc[0])
     )
