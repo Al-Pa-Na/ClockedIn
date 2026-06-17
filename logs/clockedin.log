@@ -1,0 +1,48 @@
+2026-06-17 16:44:40 | INFO     | etl.pipeline | Starting ingestion run: query='data engineer intern india' pages=1
+2026-06-17 16:44:41 | ERROR    | etl.extract | JSearch request failed (page 1): 401 Client Error: Unauthorized for url: https://jsearch.p.rapidapi.com/search?query=data+engineer+intern+india&page=1&num_pages=1
+2026-06-17 16:44:41 | INFO     | etl.transform | Transformed 0/0 raw jobs successfully
+2026-06-17 16:44:41 | INFO     | etl.load | No jobs to load.
+2026-06-17 16:44:41 | INFO     | etl.pipeline | Ingestion run complete: {'query': 'data engineer intern india', 'fetched': 0, 'validated': 0, 'inserted': 0, 'skipped_duplicates': 0}
+2026-06-17 16:48:13 | INFO     | etl.pipeline | Starting ingestion run: query='data engineer intern india' pages=1
+2026-06-17 16:48:21 | INFO     | etl.extract | Fetched 10 raw jobs for query='data engineer intern india' page=1
+2026-06-17 16:48:21 | INFO     | etl.transform | Transformed 10/10 raw jobs successfully
+2026-06-17 16:50:03 | INFO     | etl.pipeline | Starting ingestion run: query='data engineer intern india' pages=1
+2026-06-17 16:50:14 | INFO     | etl.extract | Fetched 10 raw jobs for query='data engineer intern india' page=1
+2026-06-17 16:50:14 | INFO     | etl.transform | Transformed 10/10 raw jobs successfully
+2026-06-17 16:50:14 | INFO     | db.repository | Load complete: 10 inserted, 0 skipped (duplicates)
+2026-06-17 16:50:14 | INFO     | etl.pipeline | Ingestion run complete: {'query': 'data engineer intern india', 'fetched': 10, 'validated': 10, 'inserted': 10, 'skipped_duplicates': 0}
+2026-06-17 16:51:30 | INFO     | etl.pipeline | Starting ingestion run: query='software engineer intern india' pages=1
+2026-06-17 16:51:46 | ERROR    | etl.extract | JSearch request failed (page 1): HTTPSConnectionPool(host='jsearch.p.rapidapi.com', port=443): Read timed out. (read timeout=15)
+2026-06-17 16:51:46 | INFO     | etl.transform | Transformed 0/0 raw jobs successfully
+2026-06-17 16:51:46 | INFO     | etl.load | No jobs to load.
+2026-06-17 16:51:46 | INFO     | etl.pipeline | Ingestion run complete: {'query': 'software engineer intern india', 'fetched': 0, 'validated': 0, 'inserted': 0, 'skipped_duplicates': 0}
+2026-06-17 16:51:48 | INFO     | etl.pipeline | Starting ingestion run: query='machine learning intern india' pages=1
+2026-06-17 16:51:56 | INFO     | etl.extract | Fetched 10 raw jobs for query='machine learning intern india' page=1
+2026-06-17 16:51:56 | INFO     | etl.transform | Transformed 10/10 raw jobs successfully
+2026-06-17 16:51:57 | INFO     | db.repository | Load complete: 10 inserted, 0 skipped (duplicates)
+2026-06-17 16:51:57 | INFO     | etl.pipeline | Ingestion run complete: {'query': 'machine learning intern india', 'fetched': 10, 'validated': 10, 'inserted': 10, 'skipped_duplicates': 0}
+2026-06-17 16:51:58 | INFO     | etl.pipeline | Starting ingestion run: query='data analyst intern india' pages=1
+2026-06-17 16:52:12 | INFO     | etl.extract | Fetched 10 raw jobs for query='data analyst intern india' page=1
+2026-06-17 16:52:12 | INFO     | etl.transform | Transformed 10/10 raw jobs successfully
+2026-06-17 16:52:12 | INFO     | db.repository | Load complete: 10 inserted, 0 skipped (duplicates)
+2026-06-17 16:52:12 | INFO     | etl.pipeline | Ingestion run complete: {'query': 'data analyst intern india', 'fetched': 10, 'validated': 10, 'inserted': 10, 'skipped_duplicates': 0}
+2026-06-17 17:00:38 | INFO     | etl.pipeline | Starting ingestion run: query='python developer intern india' pages=1
+2026-06-17 17:00:50 | INFO     | etl.extract | Fetched 10 raw jobs for query='python developer intern india' page=1
+2026-06-17 17:00:50 | INFO     | etl.transform | Transformed 10/10 raw jobs successfully
+2026-06-17 17:00:50 | INFO     | db.repository | Load complete: 10 inserted, 0 skipped (duplicates)
+2026-06-17 17:00:50 | INFO     | etl.pipeline | Ingestion run complete: {'query': 'python developer intern india', 'fetched': 10, 'validated': 10, 'inserted': 10, 'skipped_duplicates': 0}
+2026-06-17 17:00:52 | INFO     | etl.pipeline | Starting ingestion run: query='backend engineer intern india' pages=1
+2026-06-17 17:01:01 | INFO     | etl.extract | Fetched 10 raw jobs for query='backend engineer intern india' page=1
+2026-06-17 17:01:01 | INFO     | etl.transform | Transformed 10/10 raw jobs successfully
+2026-06-17 17:01:01 | INFO     | db.repository | Load complete: 9 inserted, 1 skipped (duplicates)
+2026-06-17 17:01:01 | INFO     | etl.pipeline | Ingestion run complete: {'query': 'backend engineer intern india', 'fetched': 10, 'validated': 10, 'inserted': 9, 'skipped_duplicates': 1}
+2026-06-17 17:01:03 | INFO     | etl.pipeline | Starting ingestion run: query='ai engineer intern india' pages=1
+2026-06-17 17:01:11 | INFO     | etl.extract | Fetched 10 raw jobs for query='ai engineer intern india' page=1
+2026-06-17 17:01:11 | INFO     | etl.transform | Transformed 10/10 raw jobs successfully
+2026-06-17 17:01:11 | INFO     | db.repository | Load complete: 10 inserted, 0 skipped (duplicates)
+2026-06-17 17:01:11 | INFO     | etl.pipeline | Ingestion run complete: {'query': 'ai engineer intern india', 'fetched': 10, 'validated': 10, 'inserted': 10, 'skipped_duplicates': 0}
+2026-06-17 17:01:12 | INFO     | etl.pipeline | Starting ingestion run: query='data scientist intern india' pages=1
+2026-06-17 17:01:30 | INFO     | etl.extract | Fetched 10 raw jobs for query='data scientist intern india' page=1
+2026-06-17 17:01:30 | INFO     | etl.transform | Transformed 10/10 raw jobs successfully
+2026-06-17 17:01:31 | INFO     | db.repository | Load complete: 10 inserted, 0 skipped (duplicates)
+2026-06-17 17:01:31 | INFO     | etl.pipeline | Ingestion run complete: {'query': 'data scientist intern india', 'fetched': 10, 'validated': 10, 'inserted': 10, 'skipped_duplicates': 0}

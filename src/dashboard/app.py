@@ -43,11 +43,10 @@ ORDER BY total_jobs DESC;
 
 company_query = """
 SELECT
-    c.company_name,
+    company_name,
     COUNT(*) AS total_jobs
-FROM jobs j
-JOIN companies c ON j.company_id = c.company_id
-GROUP BY c.company_name
+FROM real_jobs
+GROUP BY company_name
 ORDER BY total_jobs DESC;
 """
 
@@ -55,17 +54,18 @@ location_query = """
 SELECT
     location,
     COUNT(*) AS total_jobs
-FROM job_snapshots
+FROM real_jobs
+WHERE location IS NOT NULL
 GROUP BY location
 ORDER BY total_jobs DESC;
 """
 
 summary_query = """
 SELECT
-    COUNT(*) AS total_snapshots,
-    COUNT(DISTINCT job_id) AS unique_jobs,
-    COUNT(DISTINCT snapshot_date) AS active_days
-FROM job_snapshots;
+    COUNT(*) AS total_jobs,
+    COUNT(DISTINCT company_name) AS total_companies,
+    COUNT(DISTINCT DATE(posted_at)) AS active_days
+FROM real_jobs;
 """
 
 quality_metrics = {
@@ -87,6 +87,17 @@ quality_metrics = {
     """
 }
 
+real_jobs_query = """
+SELECT
+    title,
+    company_name,
+    location,
+    employment_type,
+    posted_at
+FROM real_jobs
+ORDER BY posted_at DESC NULLS LAST;
+"""
+
 skill_df = pd.read_sql(skill_query, engine)
 role_df = pd.read_sql(role_query, engine)
 company_df = pd.read_sql(company_query, engine)
@@ -97,18 +108,21 @@ missing_loc_df = pd.read_sql(quality_metrics["Missing Locations"], engine)
 missing_stipend_df = pd.read_sql(quality_metrics["Missing Stipends"], engine)
 orphan_skills_df = pd.read_sql(quality_metrics["Orphan Skills"], engine)
 
+real_jobs_df = pd.read_sql(real_jobs_query, engine)
+
 col1, col2, col3 = st.columns(3)
-col1.metric("Snapshots", int(summary_df["total_snapshots"][0]))
-col2.metric("Jobs", int(summary_df["unique_jobs"][0]))
+col1.metric("Jobs", int(summary_df["total_jobs"][0]))
+col2.metric("Companies", int(summary_df["total_companies"][0]))
 col3.metric("Active Days", int(summary_df["active_days"][0]))
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs(
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
     [
         "Market Overview",
         "Skills",
         "Companies",
         "Locations",
-        "Data Quality"
+        "Data Quality",
+        "Live Jobs"
     ]
 )
 
@@ -203,4 +217,57 @@ with tab5:
     q_col3.metric(
         label="Orphan Skills",
         value=int(orphan_skills_df["count"].iloc[0])
+    )
+
+with tab6:
+    st.subheader("Live Internship Feed")
+
+    st.dataframe(
+        real_jobs_df,
+        use_container_width=True,
+        hide_index=True
+    )
+
+    st.subheader("Top Hiring Companies")
+
+    company_counts = (
+        real_jobs_df
+        .groupby("company_name")
+        .size()
+        .reset_index(name="jobs")
+        .sort_values("jobs", ascending=False)
+        .head(10)
+    )
+
+    company_fig = px.bar(
+        company_counts,
+        x="company_name",
+        y="jobs"
+    )
+
+    st.plotly_chart(
+        company_fig,
+        use_container_width=True
+    )
+
+    st.subheader("Top Hiring Locations")
+
+    location_counts = (
+        real_jobs_df
+        .groupby("location")
+        .size()
+        .reset_index(name="jobs")
+        .sort_values("jobs", ascending=False)
+        .head(10)
+    )
+
+    location_fig = px.bar(
+        location_counts,
+        x="location",
+        y="jobs"
+    )
+
+    st.plotly_chart(
+        location_fig,
+        use_container_width=True
     )
