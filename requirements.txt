@@ -1,0 +1,9 @@
+streamlit
+pandas
+sqlalchemy
+psycopg2-binary
+plotly
+requests
+python-dotenv
+pydantic
+pydantic-settings

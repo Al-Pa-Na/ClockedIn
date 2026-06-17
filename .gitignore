@@ -10,3 +10,6 @@ data/raw/*
 data/processed/*
 
 .vscode/
+
+logs/
+*.log
